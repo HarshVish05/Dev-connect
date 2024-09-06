@@ -1,0 +1,15 @@
+express
+express-validator   --->  for data validation
+bcryptjs  ---->   password encryption
+config         -------->    global variable
+gravatar     ----->   for profile image
+jsonwebtoken   -------> for jwt auth
+mongoose     ------>   to interact with the database
+request ----->  
+
+
+
+####   Dev Dependencies
+
+nodemon
+concurrently   ----->   to run backend and frontend server at same time with one cmd
