@@ -71,7 +71,7 @@ export const getAuthUser = async(req, res) =>{
     try {
 
         const user = await User.findById(req.user.id).select('-password') // -password will not return the password
-        res.json({user})
+        res.json(user)
         
     } catch (error) {
         console.error(error.message);
@@ -88,7 +88,7 @@ export const login = async(req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { name, email, password } = req.body;
+  const {  email, password } = req.body;
 
   try {
     //  See if user exists
