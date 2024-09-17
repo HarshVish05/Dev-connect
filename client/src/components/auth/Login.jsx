@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../redux/actions/authAction";
 
 
 const Login = () => {
@@ -9,12 +11,21 @@ const Login = () => {
     password: "",
   });
 
+  const dispatch = useDispatch()
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
+  const navigate = useNavigate()
+
   const { email, password } = formData;
 
   const submitHandler = async(e) => {
     e.preventDefault()
-    console.log('success');
+
+    dispatch(login(email, password))
     
+  }
+
+  if(isAuthenticated){
+    navigate('/dashboard')
   }
 
   return (

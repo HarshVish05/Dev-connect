@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { setAlert } from "../../redux/actions/alertAction.js";
+import { register } from "../../redux/actions/authAction.js";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -10,15 +13,25 @@ const Register = () => {
     password2: "",
   });
 
+  const dispatch = useDispatch()
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
+  const navigate = useNavigate()
+
   const { name, email, password, password2 } = formData;
 
-  const submitHandler = async(e) => {
+  const submitHandler = (e) => {
     e.preventDefault()
     if(password !== password2){
-        console.log("Passwords do not match");
+        console.log('register clicked');
+        
+        dispatch(setAlert("Passwords do not match", 'danger'));
     }else{
-        console.log(formData);
+        dispatch(register({name, email, password}))
     }
+  }
+
+  if(isAuthenticated){
+    navigate('/dashboard')
   }
 
   return (
@@ -38,7 +51,7 @@ const Register = () => {
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
               }
-              required
+            //   required
             />
           </div>
           <div className="form-group">
@@ -48,7 +61,7 @@ const Register = () => {
               name="email"
               value={email}
               onChange={e => setFormData({...formData, email: e.target.value})}
-              required
+            //   required
             />
             <small className="form-text">
               This site uses Gravatar so if you want a profile image, use a
@@ -60,7 +73,7 @@ const Register = () => {
               type="password"
               placeholder="Password"
               name="password"
-              minLength="6"
+            //   minLength="6"
               value={password}
               onChange={e => setFormData({...formData, password: e.target.value})}
             />
@@ -70,7 +83,7 @@ const Register = () => {
               type="password"
               placeholder="Confirm Password"
               name="password2"
-              minLength="6"
+            //   minLength="6"
               value={password2}
               onChange={e => setFormData({...formData, password2: e.target.value})}
             />
