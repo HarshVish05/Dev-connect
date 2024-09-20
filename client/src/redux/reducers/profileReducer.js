@@ -1,4 +1,4 @@
-import { CLEAR_PROFILE, GET_PROFILE, PROFILE_ERROR } from "../constants"
+import { CLEAR_PROFILE, GET_PROFILE, GET_PROFILES, GET_REPOS, PROFILE_ERROR, UPDATE_PROFILE } from "../constants"
 
 const initialState = {
     profile: null,
@@ -15,9 +15,24 @@ export const profileReducer = (state = initialState, action) => {
 
     switch(type){
         case GET_PROFILE:
+        case UPDATE_PROFILE:
             return {
                 ...state,
                 profile: payload,
+                loading: false
+            }
+
+        case GET_PROFILES:
+            return{
+                ...state,
+                profiles: payload,
+                loading: false
+            }
+
+        case GET_REPOS:
+            return {
+                ...state,
+                repos: payload,
                 loading: false
             }
 
@@ -25,7 +40,8 @@ export const profileReducer = (state = initialState, action) => {
             return{
                 ...state,
                 error: payload,
-                loading: false
+                loading: false,
+                profile: null
             }
 
         case CLEAR_PROFILE:

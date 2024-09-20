@@ -11,6 +11,13 @@ import store from "./store.js";
 import { loadUser } from "./redux/actions/authAction.js";
 import Dashboard from "./components/dashboard/Dashboard.jsx";
 import PrivateRoute from "./components/routing/PrivateRoute.jsx";
+import CreateProfile from "./components/profile-form/CreateProfile.jsx";
+import EditProfile from "./components/profile-form/EditProfile.jsx";
+import AddExperience from "./components/profile-form/AddExperience.jsx";
+import AddEducation from "./components/profile-form/AddEducation.jsx";
+import Profiles from "./components/profiles/Profiles.jsx";
+import Profile from "./components/profile/Profile.jsx";
+
 
 
 if(localStorage.token){
@@ -33,7 +40,17 @@ function App() {
           <Alert/>
         </section>
         <Routes>
-          <Route exact path="/" element={<Landing />} />
+          <Route  path="/" element={<Landing />} />
+          <Route  path="/profiles" element={
+              <section className="container">
+                <Profiles />
+              </section>
+            } />
+          <Route  path="/profile/:id" element={
+              <section className="container">
+                <Profile />
+              </section>
+            } />
 
           {/* Authentication */}
           <Route
@@ -60,6 +77,50 @@ function App() {
             element={
               <section className="container">
                 <Dashboard />
+              </section>
+            }
+          />
+          </Route>
+
+          <Route element={<PrivateRoute/>}>
+            <Route
+            path="/create-profile"
+            element={
+              <section className="container">
+                <CreateProfile />
+              </section>
+            }
+          />
+          </Route>
+
+          <Route element={<PrivateRoute/>}>
+            <Route
+            path="/edit-profile"
+            element={
+              <section className="container">
+                <EditProfile />
+              </section>
+            }
+          />
+          </Route>
+
+          <Route element={<PrivateRoute/>}>
+            <Route
+            path="/add-experience"
+            element={
+              <section className="container">
+                <AddExperience />
+              </section>
+            }
+          />
+          </Route>
+
+          <Route element={<PrivateRoute/>}>
+            <Route
+            path="/add-education"
+            element={
+              <section className="container">
+                <AddEducation />
               </section>
             }
           />

@@ -12,7 +12,7 @@ const Login = () => {
   });
 
   const dispatch = useDispatch()
-  const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
+  const {isAuthenticated} = useSelector(state => state.auth)
   const navigate = useNavigate()
 
   const { email, password } = formData;

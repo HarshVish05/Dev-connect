@@ -1,9 +1,12 @@
 import React, { Fragment, useEffect } from "react";
-import { getCurrentProfile } from "../../redux/actions/profileAction";
+import { deleteAccount, getCurrentProfile } from "../../redux/actions/profileAction";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../layout/Spinner";
-import { FaUser } from "react-icons/fa";
+import { FaUser, FaUserMinus } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import DashboardAction from "./DashboardAction";
+import Experience from "./Experience";
+import Education from "./Education";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -13,7 +16,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(getCurrentProfile());
-  }, []);
+  }, [dispatch]);
 
   return loading && profile == null ? (
     <Spinner />
@@ -27,7 +30,18 @@ const Dashboard = () => {
         Welcome {user && user.name}
       </p>
       {profile !== null ? (
-        <Fragment>has</Fragment>
+        <Fragment>
+            <DashboardAction/>
+            <Experience experience={profile.experience} />
+            <Education education={profile.education} />
+
+            <div className="my-2">
+              <button className="btn btn-danger" onClick={()=> dispatch(deleteAccount())}>
+                <FaUserMinus/>{' '}
+                Delete My Account
+              </button>
+            </div>
+        </Fragment>
       ) : (
         <Fragment>
           <p>You have not yet created a profile, please add some info.</p>

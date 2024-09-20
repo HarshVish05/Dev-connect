@@ -10,7 +10,7 @@ const Landing = () => {
     if(isAuthenticated){
       navigate('/dashboard')
     }
-  },[])
+  },[isAuthenticated, navigate])
   
   return (
     <div>

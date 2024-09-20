@@ -2,6 +2,7 @@ import { validationResult } from "express-validator";
 import { Profile } from "../models/Profile.js";
 import normalizeUrl from "normalize-url";
 import { User } from "../models/User.js";
+import { Posts } from "../models/Post.js";
 import request from "request";
 
 export const getMyProfile = async (req, res) => {
@@ -95,7 +96,7 @@ export const getAllProfiles = async (req, res) => {
   try {
     const profiles = await Profile.find().populate("user", [
       "name",
-      "gravatar",
+      "avatar",
     ]); // populate is used to include the given fields from user model
 
     res.json(profiles);
@@ -109,7 +110,7 @@ export const getProfileByUserId = async (req, res) => {
   try {
     const profile = await Profile.findOne({
       user: req.params.user_id,
-    }).populate("user", ["name", "gravatar"]); // populate is used to include the given fields from user model
+    }).populate("user", ["name", "avatar"]); // populate is used to include the given fields from user model
     if (!profile) {
       return res.status(400).json({ msg: "Profile not found" });
     }
@@ -127,7 +128,8 @@ export const getProfileByUserId = async (req, res) => {
 
 export const deleteProfile = async (req, res) => {
   try {
-    // @todo - remove posts
+    // Remove user posts
+    await Posts.deleteMany({ user: req.user.id })
 
     // Remove profile
     await Profile.findOneAndDelete({ user: req.user.id });
@@ -242,6 +244,7 @@ export const deleteEducation = async (req, res) => {
     res.status(500).send("Server error");
   }
 };
+
 
 export const getGitHub = async (req, res) => {
   try {

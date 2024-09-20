@@ -30,7 +30,7 @@ router.get('/getallprofile', getAllProfiles)
 router.get('/user/:user_id', getProfileByUserId)
 
 
-//  @route     DEL api/profile/deleteuser/:user_id
+//  @route     DEL api/profile/deleteuser/
 //  @desc      delete profile,user and posts
 //  @access    Private
 router.delete('/deleteuser', authMiddleware, deleteProfile)
