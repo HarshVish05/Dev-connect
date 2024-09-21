@@ -17,6 +17,8 @@ import AddExperience from "./components/profile-form/AddExperience.jsx";
 import AddEducation from "./components/profile-form/AddEducation.jsx";
 import Profiles from "./components/profiles/Profiles.jsx";
 import Profile from "./components/profile/Profile.jsx";
+import Posts from "./components/posts/Posts.jsx";
+import Post from "./components/post/Post.jsx";
 
 
 
@@ -121,6 +123,28 @@ function App() {
             element={
               <section className="container">
                 <AddEducation />
+              </section>
+            }
+          />
+          </Route>
+
+          <Route element={<PrivateRoute/>}>
+            <Route
+            path="/posts"
+            element={
+              <section className="container">
+                <Posts />
+              </section>
+            }
+          />
+          </Route>
+
+          <Route element={<PrivateRoute/>}>
+            <Route
+            path="/posts/:postid"
+            element={
+              <section className="container">
+                <Post />
               </section>
             }
           />

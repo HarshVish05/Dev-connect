@@ -40,8 +40,8 @@ const Profile = () => {
           <div className="profile-grid my-1">
             <ProfileTop profile={profile} />
             <ProfileAbout profile={profile} />
-            <div class="profile-exp bg-white p-2">
-              <h2 class="text-primary">Experience</h2>
+            <div className="profile-exp bg-white p-2">
+              <h2 className="text-primary">Experience</h2>
               {profile.experience.length > 0 ? (
                 <Fragment>
                   {profile.experience.map((experience) => (
@@ -56,8 +56,8 @@ const Profile = () => {
               )}
             </div>
 
-            <div class="profile-edu bg-white p-2">
-              <h2 class="text-primary">Education</h2>
+            <div className="profile-edu bg-white p-2">
+              <h2 className="text-primary">Education</h2>
               {profile.education.length > 0 ? (
                 <Fragment>
                   {profile.education.map((edu) => (
@@ -69,9 +69,9 @@ const Profile = () => {
               )}
             </div>
             {profile.githubusername && (
-              <div class="profile-github">
-                <h2 class="text-primary my-1">
-                  <i class="fab fa-github"><FaGithub/></i> Github Repos
+              <div className="profile-github">
+                <h2 className="text-primary my-1">
+                  <i className="fab fa-github"><FaGithub/></i> Github Repos
                 </h2>
                 
                   <ProfileGithub username={profile.githubusername}/>

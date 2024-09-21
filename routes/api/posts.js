@@ -13,7 +13,7 @@ router.post('/create', [authMiddleware, [
 ]], createPost)
 
 
-//  @route     GET api/posts/create
+//  @route     GET api/posts
 //  @desc      get all posts
 //  @access    Private
 router.get('/', authMiddleware, getAllPosts)
