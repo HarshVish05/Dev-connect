@@ -19,6 +19,7 @@ import Profiles from "./components/profiles/Profiles.jsx";
 import Profile from "./components/profile/Profile.jsx";
 import Posts from "./components/posts/Posts.jsx";
 import Post from "./components/post/Post.jsx";
+import NotFound from "./components/layout/NotFound.jsx";
 
 
 
@@ -150,6 +151,7 @@ function App() {
           />
           </Route>
 
+            <Route path="*" element={<NotFound/>} />
         </Routes>
       </Router>
     </div>
