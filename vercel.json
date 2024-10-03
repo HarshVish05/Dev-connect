@@ -18,6 +18,7 @@
       { "src": "/(.*)", "dest": "/client/build/index.html" }
     ],
     "installCommand": "npm install --legacy-peer-deps",
-    "buildCommand": "npm run build --prefix client"
+    "buildCommand": "npm run build --prefix client",
+    "outputDirectory": "client/build"
   }
   
