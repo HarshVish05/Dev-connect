@@ -32,6 +32,8 @@ const EditProfile = () => {
   const [displaySocialMediaInputs, toggleSocialMediaInputs] = useState(false);
   const profile = useSelector((state) => state.profile.profile);
   const loading = useSelector((state) => state.profile.loading);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCurrentProfile());
@@ -64,8 +66,7 @@ const EditProfile = () => {
     profile.social
   ]);
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  
 
   const {
     company,
