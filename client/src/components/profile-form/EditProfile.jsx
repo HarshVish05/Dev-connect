@@ -53,6 +53,7 @@ const EditProfile = () => {
     });
   }, [
     loading,
+    dispatch,
     profile.company,
     profile.website,
     profile.location,
