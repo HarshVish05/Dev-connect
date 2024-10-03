@@ -8,7 +8,10 @@ import {
 } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { createProfile, getCurrentProfile } from "../../redux/actions/profileAction";
+import {
+  createProfile,
+  getCurrentProfile,
+} from "../../redux/actions/profileAction";
 
 const EditProfile = () => {
   const [formData, setFormData] = useState({
@@ -27,31 +30,41 @@ const EditProfile = () => {
   });
 
   const [displaySocialMediaInputs, toggleSocialMediaInputs] = useState(false);
-  const profile = useSelector(state => state.profile.profile)
-  const loading = useSelector(state => state.profile.loading)
+  const profile = useSelector((state) => state.profile.profile);
+  const loading = useSelector((state) => state.profile.loading);
 
-  useEffect(()=>{
-    dispatch(getCurrentProfile())
+  useEffect(() => {
+    dispatch(getCurrentProfile());
 
     setFormData({
-        company: loading || !profile.company ? '' : profile.company,
-        website: loading || !profile.website ? '' : profile.website,
-        location: loading || !profile.location ? '' : profile.location,
-        status: loading || !profile.status ? '' : profile.status,
-        skills: loading || !profile.skills ? '' : profile.skills,
-        githubusername: loading || !profile.githubusername ? '' : profile.githubusername,
-        bio: loading || !profile.bio ? '' : profile.bio,
-        twitter: loading || !profile.social ? '' : profile.social.twitter,
-        facebook: loading || !profile.social ? '' : profile.social.facebook,
-        linkedin: loading || !profile.social ? '' : profile.social.linkedin,
-        youtube: loading || !profile.social ? '' : profile.social.youtube,
-        instagram: loading || !profile.social ? '' : profile.social.instagram,
-    })
-  },[loading])
+      company: loading || !profile.company ? "" : profile.company,
+      website: loading || !profile.website ? "" : profile.website,
+      location: loading || !profile.location ? "" : profile.location,
+      status: loading || !profile.status ? "" : profile.status,
+      skills: loading || !profile.skills ? "" : profile.skills,
+      githubusername:
+        loading || !profile.githubusername ? "" : profile.githubusername,
+      bio: loading || !profile.bio ? "" : profile.bio,
+      twitter: loading || !profile.social ? "" : profile.social.twitter,
+      facebook: loading || !profile.social ? "" : profile.social.facebook,
+      linkedin: loading || !profile.social ? "" : profile.social.linkedin,
+      youtube: loading || !profile.social ? "" : profile.social.youtube,
+      instagram: loading || !profile.social ? "" : profile.social.instagram,
+    });
+  }, [
+    loading,
+    profile.company,
+    profile.website,
+    profile.location,
+    profile.status,
+    profile.skills,
+    profile.githubusername,
+    profile.bio,
+    profile.social
+  ]);
 
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const {
     company,
@@ -68,13 +81,14 @@ const EditProfile = () => {
     instagram,
   } = formData;
 
-  const handleOnChange = (e) => setFormData({...formData, [e.target.name]: e.target.value})
+  const handleOnChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleOnSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    dispatch(createProfile(formData, true, navigate))
-  }
+    dispatch(createProfile(formData, true, navigate));
+  };
 
   return (
     <Fragment>
@@ -84,9 +98,13 @@ const EditProfile = () => {
         profile stand out
       </p>
       <small>* = required field</small>
-      <form className="form" onSubmit={e => handleOnSubmit(e)}>
+      <form className="form" onSubmit={(e) => handleOnSubmit(e)}>
         <div className="form-group">
-          <select name="status" value={status} onChange={e => handleOnChange(e)}>
+          <select
+            name="status"
+            value={status}
+            onChange={(e) => handleOnChange(e)}
+          >
             <option value="0">* Select Professional Status</option>
             <option value="Developer">Developer</option>
             <option value="Junior Developer">Junior Developer</option>
@@ -102,25 +120,49 @@ const EditProfile = () => {
           </small>
         </div>
         <div className="form-group">
-          <input type="text" placeholder="Company" name="company" value={company} onChange={e => handleOnChange(e)}/>
+          <input
+            type="text"
+            placeholder="Company"
+            name="company"
+            value={company}
+            onChange={(e) => handleOnChange(e)}
+          />
           <small className="form-text">
             Could be your own company or one you work for
           </small>
         </div>
         <div className="form-group">
-          <input type="text" placeholder="Website" name="website" value={website} onChange={e => handleOnChange(e)}/>
+          <input
+            type="text"
+            placeholder="Website"
+            name="website"
+            value={website}
+            onChange={(e) => handleOnChange(e)}
+          />
           <small className="form-text">
             Could be your own or a company website
           </small>
         </div>
         <div className="form-group">
-          <input type="text" placeholder="Location" name="location" value={location} onChange={e => handleOnChange(e)}/>
+          <input
+            type="text"
+            placeholder="Location"
+            name="location"
+            value={location}
+            onChange={(e) => handleOnChange(e)}
+          />
           <small className="form-text">
             City & state suggested (eg. Boston, MA)
           </small>
         </div>
         <div className="form-group">
-          <input type="text" placeholder="* Skills" name="skills" value={skills} onChange={e => handleOnChange(e)}/>
+          <input
+            type="text"
+            placeholder="* Skills"
+            name="skills"
+            value={skills}
+            onChange={(e) => handleOnChange(e)}
+          />
           <small className="form-text">
             Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)
           </small>
@@ -130,7 +172,8 @@ const EditProfile = () => {
             type="text"
             placeholder="Github Username"
             name="githubusername"
-            value={githubusername} onChange={e => handleOnChange(e)}
+            value={githubusername}
+            onChange={(e) => handleOnChange(e)}
           />
           <small className="form-text">
             If you want your latest repos and a Github link, include your
@@ -138,7 +181,12 @@ const EditProfile = () => {
           </small>
         </div>
         <div className="form-group">
-          <textarea placeholder="A short bio of yourself" name="bio" value={bio} onChange={e => handleOnChange(e)}></textarea>
+          <textarea
+            placeholder="A short bio of yourself"
+            name="bio"
+            value={bio}
+            onChange={(e) => handleOnChange(e)}
+          ></textarea>
           <small className="form-text">Tell us a little about yourself</small>
         </div>
 
@@ -159,35 +207,65 @@ const EditProfile = () => {
                 {" "}
                 <FaTwitter />
               </i>
-              <input type="text" placeholder="Twitter URL" name="twitter" value={twitter} onChange={e => handleOnChange(e)}/>
+              <input
+                type="text"
+                placeholder="Twitter URL"
+                name="twitter"
+                value={twitter}
+                onChange={(e) => handleOnChange(e)}
+              />
             </div>
 
             <div className="form-group social-input">
               <i className="fab fa-facebook fa-2x">
                 <FaFacebook />
               </i>
-              <input type="text" placeholder="Facebook URL" name="facebook" value={facebook} onChange={e => handleOnChange(e)}/>
+              <input
+                type="text"
+                placeholder="Facebook URL"
+                name="facebook"
+                value={facebook}
+                onChange={(e) => handleOnChange(e)}
+              />
             </div>
 
             <div className="form-group social-input">
               <i className="fab fa-youtube fa-2x">
                 <FaYoutube />
               </i>
-              <input type="text" placeholder="YouTube URL" name="youtube" value={youtube} onChange={e => handleOnChange(e)}/>
+              <input
+                type="text"
+                placeholder="YouTube URL"
+                name="youtube"
+                value={youtube}
+                onChange={(e) => handleOnChange(e)}
+              />
             </div>
 
             <div className="form-group social-input">
               <i className="fab fa-linkedin fa-2x">
                 <FaLinkedin />
               </i>
-              <input type="text" placeholder="Linkedin URL" name="linkedin" value={linkedin} onChange={e => handleOnChange(e)}/>
+              <input
+                type="text"
+                placeholder="Linkedin URL"
+                name="linkedin"
+                value={linkedin}
+                onChange={(e) => handleOnChange(e)}
+              />
             </div>
 
             <div className="form-group social-input">
               <i className="fab fa-instagram fa-2x">
                 <FaInstagram />
               </i>
-              <input type="text" placeholder="Instagram URL" name="instagram" value={instagram} onChange={e => handleOnChange(e)}/>
+              <input
+                type="text"
+                placeholder="Instagram URL"
+                name="instagram"
+                value={instagram}
+                onChange={(e) => handleOnChange(e)}
+              />
             </div>
           </Fragment>
         )}
